@@ -1,8 +1,15 @@
 ---
 import Main from '@/layouts/main.astro'
 import {Articles} from '@/components/Articles'
+//microCMS呼び出し
+import { getBlogs } from "@/lib/microcms";
+const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch", "category" ] });
 ---
 
-<Main title="toppage">
-    <Articles></Articles>
+<Main
+    title="ブログ一覧 | PixelFringe.com"
+    description="PixelFringe.comのすべてのブログ記事一覧です。最新のWebテクノロジー、デザイン、開発に関する記事をご覧ください。"
+    image="/girl.jpg"
+>
+    <Articles posts={response.contents}></Articles>
 </Main>

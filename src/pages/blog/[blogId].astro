@@ -1,0 +1,27 @@
+---
+import Main from '@/layouts/main.astro'
+import { getBlogs, getBlogDetail } from "@/lib/microcms";
+import { Article } from '@/components/Article';
+
+// 詳細記事ページの全パスを取得
+export async function getStaticPaths() {
+  const response = await getBlogs({ fields: ["id"] });
+  return response.contents.map((content: any) => ({
+    params: {
+      blogId: content.id,
+    },
+  }));
+}
+
+const { blogId } = Astro.params;
+const blog = await getBlogDetail(blogId as string);
+---
+
+<Main
+    title={blog.title}
+    description={blog.description || blog.title}
+    image={blog.eyecatch.url}
+    type="article"
+>
+    <Article blog={blog} />
+</Main>

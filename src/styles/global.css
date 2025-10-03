@@ -1,12 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+  --radius-lg: var(---radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -117,4 +118,47 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .prose {
+    h2 {
+      @apply mt-16 mb-6 pb-2 font-bold border-b-2 border-gray-200;
+    }
+    h3 {
+      @apply mt-12 mb-4 font-semibold;
+    }
+    p {
+      @apply mt-4 mb-4 leading-relaxed;
+    }
+    pre {
+      @apply bg-gray-800 text-white p-4 rounded-lg shadow-md;
+      line-height: 1.4;
+      font-size: 0.875rem;
+    }
+    code {
+      @apply bg-gray-200 text-red-600 font-mono rounded px-1 py-0.5;
+      line-height: 1.4;
+      font-size: 0.875rem;
+    }
+    pre code {
+      @apply bg-transparent text-inherit p-0 rounded-none;
+      line-height: inherit;
+      font-size: inherit;
+    }
+  }
+
+  .dark .prose {
+    h2 {
+      @apply border-gray-700;
+    }
+    pre {
+      @apply bg-gray-900;
+    }
+    code {
+      @apply bg-gray-700 text-red-400;
+    }
+    pre code {
+      @apply bg-transparent text-inherit;
+    }
+  }
 }
+

@@ -23,6 +23,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface MenuItem {
   title: string;
@@ -57,23 +58,18 @@ const Navbar = ({
     url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "PixcelLab.com",
+    title: "PixelFringe.com",
   },
   menu = [
-    { title: "Home", url: "#" },
-    {
-      title: "Pricing",
-      url: "#",
-    },
     {
       title: "Blog",
-      url: "#",
+      url: "/blog",
+    },
+    {
+      title: "Privacy Policy",
+      url: "/privacy-policy",
     },
   ],
-  auth = {
-    login: { title: "Login", url: "#" },
-    signup: { title: "Sign up", url: "#" },
-  },
 }: Navbar1Props) => {
   return (
     <section className="py-4 px-2">
@@ -101,6 +97,7 @@ const Navbar = ({
             </div>
           </div>
           <div className="flex gap-2">
+            <ThemeToggle />
           </div>
         </nav>
 
@@ -143,6 +140,7 @@ const Navbar = ({
                   </Accordion>
 
                   <div className="flex flex-col gap-3">
+                    <ThemeToggle />
                   </div>
                 </div>
               </SheetContent>

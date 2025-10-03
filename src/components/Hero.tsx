@@ -17,11 +17,11 @@ interface Hero1Props {
 }
 
 const Hero = ({
-  heading = "PixcelLab",
+  heading = "PixelFringe",
   description = "わたくしのインターネットの居場所",
   buttons = {
-    text: "View on GitHub",
-    url: "https://www.shadcnblocks.com",
+    text: "View on Kipfel",
+    url: "/kipfel",
   },
   image = {
     src: "kip_sad.png",

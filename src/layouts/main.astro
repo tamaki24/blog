@@ -1,6 +1,18 @@
 ---
 import '../styles/global.css';
-const { title } = Astro.props;
+
+interface Props {
+  title: string;
+  description?: string;
+  image?: string;
+  url?: string;
+  type?: string;
+  siteName?: string;
+  noindex?: boolean; // noindex プロパティを追加
+}
+
+const { title, description = "Astroで作られたブログサイトです。", image = "/girl.jpg", url = Astro.url.href, type = "website", siteName = "PixcelNook.com", noindex = false } = Astro.props;
+
 import { Navbar } from '@/components/Navbar';
 ---
 
@@ -9,10 +21,46 @@ import { Navbar } from '@/components/Navbar';
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="stylesheet" href="/styles.css" />
 		<title>{title}</title>
+		<meta name="description" content={description} />
+
+		<!-- OGP -->
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, Astro.site).href} />
+		<meta property="og:url" content={url} />
+		<meta property="og:type" content={type} />
+		<meta property="og:site_name" content={siteName} />
+
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={new URL(image, Astro.site).href} />
+
+		{noindex && <meta name="robots" content="noindex" />}
+
+		<script is:inline>
+			const theme = (() => {
+			  if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+				return localStorage.getItem('theme');
+			  }
+			  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+				return 'dark';
+			  }
+			  return 'light';
+			})();
+		  
+			if (theme === 'light') {
+			  document.documentElement.classList.remove('dark');
+			} else {
+			  document.documentElement.classList.add('dark');
+			}
+		  </script>
 	</head>
 	<body>
-		<Navbar/>
+		<Navbar client:load />
 		<slot />
 	</body>
 </html>
