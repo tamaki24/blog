@@ -72,7 +72,7 @@ const Articles = ({
                   </div>
                   <h3 className="text-xl font-semibold md:text-2xl lg:text-3xl">
                     <a
-                      href={"blog/" + post.id}
+                      href={"/blog/" + post.id}
                       target="_blank"
                       className="hover:underline"
                     >
@@ -86,7 +86,7 @@ const Articles = ({
                   </div>
                   <div className="mt-6 flex items-center space-x-2 md:mt-8">
                     <a
-                      href={"blog/" + post.id}
+                      href={"/blog/" + post.id}
                       target="_blank"
                       className="inline-flex items-center font-semibold hover:underline md:text-base"
                     >
@@ -96,7 +96,7 @@ const Articles = ({
                   </div>
                 </div>
                 <div className="order-first sm:order-last sm:col-span-5">
-                  <a href={"blog/" + post.id} target="_blank" className="block">
+                  <a href={"/blog/" + post.id} target="_blank" className="block">
                     <div className="aspect-16/9 overflow-clip rounded-lg border border-border">
                       <img
                         src={post.eyecatch.url}
