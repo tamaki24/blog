@@ -29,7 +29,7 @@ const Hero = ({
   },
 }: Hero1Props) => {
   return (
-    <section className="pt-28 pb-10">
+    <section className="pt-20 pb-10">
       <div className="container">
         <div className="grid items-center gap-8 lg:grid-cols-2">
           <div className="lg:ml-20 flex flex-col items-center text-center lg:items-start lg:text-left">

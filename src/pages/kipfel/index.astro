@@ -18,7 +18,7 @@ const images = [
 
   <div class="image-gallery">
     {
-      images.map((image) => <img src={image.url} alt="kipfel" class="gallery-image">)
+      images.map((image) => <img loading="lazy" src={image.url} alt="kipfel" class="gallery-image">)
     }
   </div>
 </Main>
