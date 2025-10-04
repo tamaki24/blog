@@ -10,8 +10,8 @@ const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch"
 
 
 <Main
-	title="PixelFringe.com | 最新のテクノロジーとデザインのブログ"
-	description="PixelFringe.comは、最新のWebテクノロジー、デザイン、開発に関する洞察を提供するブログです。フロントエンドからバックエンドまで、役立つ情報をお届けします。"
+	title="PixelFringe.com | VRChatに住んでいるWeb屋さんのブログです"
+	description="PixelFringe.comは、VRChatの話やWeb制作的な話を掲載しています。"
 	image="/kip_sad.png"
 >
 	<div class="place-items-center h-screen content-center px-5">
@@ -19,7 +19,7 @@ const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch"
 		<Blog
             posts={response.contents}
             heading="Latest Blog Posts"
-            buttonText="すべての記事を見る"
+            buttonText="Read more"
             buttonUrl="/blog"
         />
 	</div>
