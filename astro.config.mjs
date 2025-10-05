@@ -9,7 +9,7 @@ import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'http://localhost:4321',
+  site: process.env.SITE_URL || 'http://localhost:4321',
   vite: {
       plugins: [tailwindcss()],
 	},
