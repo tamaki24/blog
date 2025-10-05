@@ -72,7 +72,7 @@ const Navbar = ({
   ],
 }: Navbar1Props) => {
   return (
-    <section className="py-4 px-2">
+    <section className="py-4 px-6">
       <div className="container">
         {/* Desktop Menu */}
         <nav className="hidden justify-between lg:flex">

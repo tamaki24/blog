@@ -14,7 +14,32 @@ export async function getStaticPaths() {
 }
 
 const { blogId } = Astro.params;
-const blog = await getBlogDetail(blogId as string);
+const blog = await getBlogDetail(blogId as string, { fields: ["id", "title", "content", "createdAt", "eyecatch", "category"] });
+
+import * as cheerio from "cheerio";
+
+const $ = cheerio.load(blog.content);
+const headings = $("h1, h2, h3").toArray().map((data) => {
+    const text = $(data).text();
+    const id = data.attribs.id;
+    // @ts-ignore
+    const name = data.name;
+    return { text, id, name };
+});
+
+$("h1, h2, h3").each((_, elm) => {
+    const text = $(elm).text();
+    // @ts-ignore
+    const id = elm.attribs.id;
+    $(elm).attr("id", id);
+});
+
+const updatedContent = $.html();
+
+const updatedBlog = {
+    ...blog,
+    content: updatedContent,
+};
 ---
 
 <Main
@@ -23,5 +48,5 @@ const blog = await getBlogDetail(blogId as string);
     image={blog.eyecatch.url}
     type="article"
 >
-    <Article blog={blog} />
+    <Article blog={updatedBlog} headings={headings} />
 </Main>
