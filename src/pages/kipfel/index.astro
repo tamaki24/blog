@@ -1,11 +1,13 @@
 ---
 import Main from '@/layouts/main.astro'
+import { Image } from "astro:assets";
 const images = [
   { url: "https://image.pixelfringe.com/VRChat_2025-10-04_14-13-55.368_3840x2160.png" },
   { url: "https://image.pixelfringe.com/VRChat_2025-10-04_14-21-56.321_3840x2160.png" },
   { url: "https://image.pixelfringe.com/VRChat_2025-10-04_14-30-42.749_3840x2160.png" },
   { url: "https://image.pixelfringe.com/VRChat_2025-10-04_14-37-23.613_3840x2160.png" },
   { url: "https://image.pixelfringe.com/VRChat_2025-10-04_14-42-50.056_3840x2160.png" },
+  { url: "https://image.pixelfringe.com/VRChat_2025-10-05_22-04-32.639_3840x2160.png" },
   // { url: "" },
 ]
 ---
@@ -18,7 +20,7 @@ const images = [
 
   <div class="image-gallery">
     {
-      images.map((image) => <img loading="lazy" src={image.url} alt="kipfel" class="gallery-image">)
+      images.map((image) => <Image src={image.url} alt="kipfel" class="gallery-image" width={1920} height={1080} />)
     }
   </div>
 </Main>

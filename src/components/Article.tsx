@@ -1,3 +1,12 @@
+type OptimizedImage = {
+  src: string;
+  attributes: {
+    width: number;
+    height: number;
+    [key: string]: any;
+  };
+};
+
 type Props = {
   blog: {
     title: string;
@@ -11,10 +20,11 @@ type Props = {
     id: string;
     name: string;
   }[];
+  optimizedEyecatch: OptimizedImage;
 };
 
 const Article = (props: Props) => {
-  const { blog } = props;
+  const { blog, optimizedEyecatch } = props;
   return (
     <section className="py-24 sm:py-32">
       <div className="container mx-auto px-4">
@@ -36,8 +46,10 @@ const Article = (props: Props) => {
           </header>
 
           <img
-            src={blog.eyecatch?.url}
+            {...optimizedEyecatch.attributes}
+            src={optimizedEyecatch.src}
             alt={blog.title || "Eyecatch image"}
+            loading="eager"
             className="mb-8 w-full rounded-lg object-cover"
           />
 

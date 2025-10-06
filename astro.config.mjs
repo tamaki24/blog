@@ -10,6 +10,9 @@ import partytown from '@astrojs/partytown';
 // https://astro.build/config
 export default defineConfig({
   site: process.env.SITE_URL || 'http://localhost:4321',
+  image: {
+    domains: ["images.microcms-assets.io", "image.pixelfringe.com"],
+  },
   vite: {
       plugins: [tailwindcss()],
 	},
@@ -23,4 +26,5 @@ export default defineConfig({
       },
     }),
   ],
+  prefetch: true,
 });

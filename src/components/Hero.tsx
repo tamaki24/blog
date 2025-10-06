@@ -1,19 +1,23 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
+interface OptimizedImage {
+    src: string;
+    attributes: {
+      width: number;
+      height: number;
+    };
+}
+
 interface Hero1Props {
-  badge?: string;
   heading?: string;
   description?: string;
   buttons?: {
     text: string;
     url: string;
   };
-  image?: {
-    src: string;
-    alt: string;
-  };
+  image?: OptimizedImage;
 }
 
 const Hero = ({
@@ -23,10 +27,7 @@ const Hero = ({
     text: "View on Kipfel",
     url: "/kipfel",
   },
-  image = {
-    src: "kip_sad.png",
-    alt: "girl",
-  },
+  image,
 }: Hero1Props) => {
   return (
     <section className="pt-20 pb-10">
@@ -50,11 +51,16 @@ const Hero = ({
               )}
             </div>
           </div>
-          <img
-            src={image.src}
-            alt={image.alt}
-            className="max-h-96 w-full rounded-md object-cover"
-          />
+          {image && (
+            <img
+              src={image.src}
+              {...image.attributes}
+              alt="Hero Image"
+              className="max-h-96 w-full rounded-md object-cover"
+              loading="eager"
+              decoding="async"
+            />
+          )}
         </div>
       </div>
     </section>
@@ -62,4 +68,3 @@ const Hero = ({
 };
 
 export { Hero };
-

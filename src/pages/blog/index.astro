@@ -8,7 +8,7 @@ const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch"
 
 <Main
     title="ブログ一覧 | PixelFringe.com"
-    description="PixelFringe.comのすべてのブログ記事一覧です。最新のWebテクノロジー、デザイン、開発に関する記事をご覧ください。"
+    description="PixelFringe.comのすべてのブログ記事一覧です。"
     image="/kip_sad.png"
 >
     <Articles posts={response.contents}></Articles>

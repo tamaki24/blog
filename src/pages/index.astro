@@ -3,9 +3,18 @@ import '../styles/global.css';
 import { Hero } from '@/components/Hero';
 import { Blog } from '@/components/Blog';
 import Main from '@/layouts/main.astro'
+import { getImage } from "astro:assets";
+import heroImage from "@/assets/kip_sad.png";
 
 import { getBlogs } from "@/lib/microcms";
 const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch", "category" ], limit: 3 });
+
+const optimizedImage = await getImage({
+  src: heroImage,
+  width: 1024,
+  height: 1024,
+  format: "webp",
+});
 ---
 
 
@@ -15,7 +24,7 @@ const response = await getBlogs({ fields: ["id", "title","createdAt", "eyecatch"
 	image="/kip_sad.png"
 >
 	<div class="place-items-center h-screen content-center px-5">
-   		<Hero/>
+   		<Hero image={optimizedImage} />
 		<Blog
             posts={response.contents}
             heading="Latest Blog Posts"

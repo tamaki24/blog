@@ -1,20 +1,29 @@
 ---
-import Main from '@/layouts/main.astro'
-import { getBlogs, getBlogDetail } from "@/lib/microcms";
-import { Article } from '@/components/Article';
+import { getBlogDetail, getBlogs } from "@/lib/microcms";
+import Main from "@/layouts/main.astro";
+import { Article } from "@/components/Article";
+import { getImage } from "astro:assets";
 
 // 詳細記事ページの全パスを取得
 export async function getStaticPaths() {
-  const response = await getBlogs({ fields: ["id"] });
-  return response.contents.map((content: any) => ({
-    params: {
-      blogId: content.id,
-    },
-  }));
+    const response = await getBlogs({ fields: ["id"] });
+    return response.contents.map((content: any) => ({
+        params: {
+            blogId: content.id,
+        },
+    }));
 }
 
 const { blogId } = Astro.params;
-const blog = await getBlogDetail(blogId as string, { fields: ["id", "title", "content", "createdAt", "eyecatch", "category"] });
+const blog = await getBlogDetail(blogId as string, {
+    fields: ["id", "title", "content", "createdAt", "eyecatch", "category"],
+});
+
+const optimizedEyecatch = await getImage({
+    src: blog.eyecatch.url,
+    alt: blog.title,
+    inferSize: true,
+});
 
 import * as cheerio from "cheerio";
 
@@ -34,6 +43,18 @@ $("h1, h2, h3").each((_, elm) => {
     $(elm).attr("id", id);
 });
 
+const imagePromises = $("img").map(async (_, el) => {
+    const element = $(el);
+    const src = element.attr("src");
+    const alt = element.attr("alt");
+    if (src) {
+        const optimized = await getImage({ src, alt, inferSize: true });
+        element.attr(optimized.attributes);
+    }
+}).get();
+
+await Promise.all(imagePromises);
+
 const updatedContent = $.html();
 
 const updatedBlog = {
@@ -48,5 +69,5 @@ const updatedBlog = {
     image={blog.eyecatch.url}
     type="article"
 >
-    <Article blog={updatedBlog} headings={headings} />
+    <Article blog={updatedBlog} headings={headings} optimizedEyecatch={optimizedEyecatch} />
 </Main>
